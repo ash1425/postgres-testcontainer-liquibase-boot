@@ -11,18 +11,18 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
-abstract class BaseIntegrationTests {
+abstract class BaseIntegrationTest {
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
 
     @Container
-    public static PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>("postgres:13");
+    public static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:latest");
 
     @DynamicPropertySource
     static void dbProps(DynamicPropertyRegistry dynamicPropertyRegistry) {
-        dynamicPropertyRegistry.add("spring.datasource.url", POSTGRES::getJdbcUrl);
-        dynamicPropertyRegistry.add("spring.datasource.username", POSTGRES::getUsername);
-        dynamicPropertyRegistry.add("spring.datasource.password", POSTGRES::getPassword);
+        dynamicPropertyRegistry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
+        dynamicPropertyRegistry.add("spring.datasource.username", postgreSQLContainer::getUsername);
+        dynamicPropertyRegistry.add("spring.datasource.password", postgreSQLContainer::getPassword);
     }
 }

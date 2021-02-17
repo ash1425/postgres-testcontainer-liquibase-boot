@@ -10,7 +10,7 @@ import java.net.URI;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TodoControllerIntegrationTests extends BaseIntegrationTests {
+public class TodoControllerIntegrationTest extends BaseIntegrationTest {
 
     @LocalServerPort
     private int port;
